@@ -1,0 +1,12 @@
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Server\BCPA_OTS_Server\obj\Debug\BCPA_OTS_Server.csprojResolveAssemblyReference.cache
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Server\BCPA_OTS_Server\obj\Debug\BCPA_OTS_Server.Properties.Resources.resources
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Server\BCPA_OTS_Server\obj\Debug\BCPA_OTS_Server.csproj.GenerateResource.Cache
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Server\BCPA_OTS_Server\obj\Debug\BCPA_OTS_Server.csproj.CoreCompileInputs.cache
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Server\BCPA_OTS_Server\bin\Debug\BCPA_OTS_Server.exe.config
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Server\BCPA_OTS_Server\bin\Debug\BCPA_OTS_Server.exe
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Server\BCPA_OTS_Server\bin\Debug\BCPA_OTS_Server.pdb
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Server\BCPA_OTS_Server\obj\Debug\BCPA_OTS_Server.exe
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Server\BCPA_OTS_Server\obj\Debug\BCPA_OTS_Server.pdb
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Server\BCPA_OTS_Server\obj\Debug\BCPA_OTS_Server.MainWindow.resources
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Server\BCPA_OTS_Server\bin\Debug\MySql.Data.dll
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Server\BCPA_OTS_Server\bin\Debug\MySql.Data.xml

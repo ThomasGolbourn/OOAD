@@ -1,0 +1,15 @@
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Prototype\BCPA_OTS_Prototype\obj\Debug\BCPA_OTS_Prototype.csprojResolveAssemblyReference.cache
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Prototype\BCPA_OTS_Prototype\obj\Debug\BCPA_OTS_Prototype.LoginForm.resources
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Prototype\BCPA_OTS_Prototype\obj\Debug\BCPA_OTS_Prototype.Properties.Resources.resources
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Prototype\BCPA_OTS_Prototype\obj\Debug\BCPA_OTS_Prototype.csproj.GenerateResource.Cache
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Prototype\BCPA_OTS_Prototype\obj\Debug\BCPA_OTS_Prototype.csproj.CoreCompileInputs.cache
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Prototype\BCPA_OTS_Prototype\bin\Debug\BCPA_OTS_Prototype.exe.config
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Prototype\BCPA_OTS_Prototype\bin\Debug\BCPA_OTS_Prototype.exe
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Prototype\BCPA_OTS_Prototype\bin\Debug\BCPA_OTS_Prototype.pdb
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Prototype\BCPA_OTS_Prototype\obj\Debug\BCPA_OTS_Prototype.exe
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Prototype\BCPA_OTS_Prototype\obj\Debug\BCPA_OTS_Prototype.pdb
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Prototype\BCPA_OTS_Prototype\obj\Debug\BCPA_OTS_Prototype.RegistrationForm.resources
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Prototype\BCPA_OTS_Prototype\bin\Debug\MySql.Data.dll
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Prototype\BCPA_OTS_Prototype\bin\Debug\MySql.Data.xml
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Prototype\BCPA_OTS_Prototype\obj\Debug\BCPA_OTS_Prototype.SeatingLayoutUI.resources
+S:\Documents\Documents\University\y2s1\OOP\OOAD Group Assignment\PrototypeBuilds\Build1\BCPA_OTS_Prototype\BCPA_OTS_Prototype\obj\Debug\BCPA_OTS_Prototype.CreateModifySeatUI.resources

@@ -35,6 +35,8 @@ namespace BCPA_OTS_Prototype
         private List<SeatUI>    allSeatUIs;
         private List<Seat>      selectedSeats;
         public  List<SeatUI>    selectedSeatUIs;
+        public bool seatMoving = false;
+
 
         public SeatingLayoutUI() { }
 
@@ -148,8 +150,6 @@ namespace BCPA_OTS_Prototype
             }
         }
 
-        private bool seatMoving = false;
-
         private void ManagerClickedSeat(SeatUI clickedSeatUI, Seat clickedSeat, MouseButtons mouseBtn)
         {
             //If seat selected else if not selected
@@ -162,31 +162,74 @@ namespace BCPA_OTS_Prototype
                     Task.Run(() =>
                     {
 
-                        while (seatMoving)
-                        {
-                            //Get cursor screen pos
-                            Point cursorScreenPos = Cursor.Position;
-                            //Convert to co-ords within control, use this as our 0 pos
-                            Point cursorControlPos = this.PointToClient(new Point(cursorScreenPos.X, cursorScreenPos.Y));
+                        //Get control dimensions so we can prevent them dragging object outside of ctrl
+                        //as well as cursor dimensions so we can snap to center of cursor
+                        int halfCurSizeX = Cursor.Size.Width / 2,           halfCurSizeY = Cursor.Size.Height / 2,
+                            maxPosX = pb_layout.Size.Width - (int) (halfCurSizeX * 1.5),  maxPosY = pb_layout.Size.Height - (int) (halfCurSizeY * 1.5);
 
-                            //Get control dimensions so we can prevent them dragging object outside of ctrl
-                            int maxPosX = pb_layout.Size.Width - (Cursor.Size.Width / 2); int maxPosY = pb_layout.Size.Height - (Cursor.Size.Height / 2);
-                            if (cursorControlPos.X > maxPosX || cursorControlPos.X < 0 + (Cursor.Size.Width / 2)) { DeselectAllSeats(); };
-                            if (cursorControlPos.Y > maxPosY || cursorControlPos.Y < 0 + (Cursor.Size.Height / 2)) { DeselectAllSeats(); };
+                        //Try block in case of exception when grabbing mouse details etc
+                        try {
+                            while (seatMoving) {
+                                //Create a new 'zero' based on seat clicked and use the change in position from that to modify all others
+                                Point clickedSeatStartPos = new Point(clickedSeat.seatPosX, clickedSeat.seatPosY);
 
-                            foreach (Seat seatObj in selectedSeats)
-                            {
-                                seatObj.seatPosX = cursorControlPos.X - (Cursor.Size.Width / 2);
-                                seatObj.seatPosY = cursorControlPos.Y - (Cursor.Size.Height / 2);
-                            }
-                            foreach (SeatUI seatUIObj in selectedSeatUIs)
-                            {
-                                seatUIObj.seatPicBox.Location = new Point((cursorControlPos.X - (Cursor.Size.Width / 2)), cursorControlPos.Y - (Cursor.Size.Height / 2));
-                                seatUIObj.Refresh();
-                            }
+                                //Don't run full-on
+                                Thread.Sleep(10);
 
-                            Thread.Sleep(10);
-                        };
+                                //Get cursor screen pos
+                                Point cursorScreenPos = Cursor.Position;
+                            
+                                //Convert to co-ords within control
+                                Point cursorControlPos = this.PointToClient(new Point(cursorScreenPos.X, cursorScreenPos.Y));
+                            
+                                //Find new position for clicked seat
+                                int curCtrlPosX = cursorControlPos.X,  curCtrlPosY = cursorControlPos.Y,
+                                    newX = curCtrlPosX - halfCurSizeX, newY = curCtrlPosY - halfCurSizeY;
+                            
+                                //Check new position is in-bounds
+                                if (curCtrlPosX >= maxPosX || curCtrlPosX <= 0 + halfCurSizeX) { DeselectAllSeats(); continue; };
+                                if (curCtrlPosY >= maxPosY || curCtrlPosY <= 0 + halfCurSizeY) { DeselectAllSeats(); continue; };
+
+                                //Work out how much change has happened so we can apply it to all seats
+                                int changeInX = 0, changeInY = 0;
+                                changeInX = (newX >= clickedSeatStartPos.X) ? newX - clickedSeatStartPos.X : newX - clickedSeatStartPos.X;
+                                changeInY = (newY >= clickedSeatStartPos.Y) ? newY - clickedSeatStartPos.Y : newY - clickedSeatStartPos.Y;
+
+                                //If change in x and y are 0, then continue loop at start again
+                                if (changeInX == 0 && changeInY == 0) { continue; };
+
+                                //Use this to reset the main loop if during the for each we find an object out of bounds
+                                bool outOfBoundsExit = false;
+
+                                //Apply change to all seats, and validate all seats position is in-bounds
+                                foreach (Seat seatObj in selectedSeats) {
+                                    //Create new position using change
+                                    newX = seatObj.seatPosX + changeInX; newY = seatObj.seatPosY + changeInY;
+                                    //Check new position is in-bounds
+                                    if (newX >= maxPosX || newX <= 0 + halfCurSizeX) { DeselectAllSeats(); outOfBoundsExit = true; break; };
+                                    if (newY >= maxPosY || newY <= 0 + halfCurSizeY) { DeselectAllSeats(); outOfBoundsExit = true; break; };
+                                    //Apply change
+                                    seatObj.seatPosX = newX; seatObj.seatPosY = newY;
+                                };
+
+                                //Re-Check new position is in-bounds, if not, go to start of loop
+                                if (outOfBoundsExit) { continue; };
+
+                                //Move each pic box to match its seat object
+                                foreach (SeatUI seatUIObj in selectedSeatUIs) {
+                                    seatUIObj.seatPicBox.Location = new Point(seatUIObj.seatObj.seatPosX, seatUIObj.seatObj.seatPosY);
+                                    seatUIObj.Refresh();
+                                };
+                            };
+                        } catch (Exception e) {
+                            //Expression usually caused by tabbing out while moving seat
+                            Console.WriteLine("SeatMoving Stopped, Exception:");
+                            Console.WriteLine(e.Message);
+                            //Reset var
+                            seatMoving = false;
+                            //Deselect seats
+                            DeselectAllSeats();
+                        }
                     });
                 } else {
                     seatMoving = false;
@@ -197,12 +240,35 @@ namespace BCPA_OTS_Prototype
 
                 //Select the seat
                 SelectSeat(clickedSeatUI, clickedSeat);
+
+                //Update textbox with manager text info
+                updateSeatSelectionInfo_Manager(clickedSeatUI, clickedSeat);
+
+                //Change cursor to hand
+                this.Cursor = Cursors.Hand;
             }
         }
 
         private void CustomerOrAgentClickedLayout(Point clickPos, MouseButtons mouseBtn)
         {
             
+        }
+
+        private void updateSeatSelectionInfo_Manager(SeatUI clickedSeatUI, Seat clickedSeat)
+        {
+            rtb_selectionInfo.Text = "";
+
+            foreach (Seat seat in selectedSeats) {
+                string seatString = String.Format(
+                        "ID:\t{0}\t Name:\t{1}\n" + "X:\t{2}\t Y:\t{3}\n" + "Promo:\t{8}\t Quality:\t{9}\n" + "Status:\t{10}\t Timer:\t{11}\n" + "Prices:\n" + "\tAdult:{4}\t Senior:{5}\n"+"\tChild:{7}\t Student:{6}\n\n",
+                        seat.seatID, seat.seatName, seat.seatPosX, seat.seatPosY,
+                        seat.GetSeatPrice(Seat.TicketTypes.Adult), seat.GetSeatPrice(Seat.TicketTypes.Senior), seat.GetSeatPrice(Seat.TicketTypes.Student), seat.GetSeatPrice(Seat.TicketTypes.Child),
+                        seat.seatPromoID, seat.seatQuality, seat.seatStatus, seat.seatTimer
+                );
+
+                //Apply text
+                rtb_selectionInfo.AppendText(seatString);
+            }
         }
 
         private void btn_deleteSeats_Click(object sender, EventArgs e)

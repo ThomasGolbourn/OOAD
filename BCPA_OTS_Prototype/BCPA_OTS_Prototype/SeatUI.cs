@@ -43,6 +43,7 @@ namespace BCPA_OTS_Prototype
 
             //Add on-hover event to seat
             seatPicBox.MouseEnter += new EventHandler(OnMouseEnter);
+            seatPicBox.MouseHover += new EventHandler(OnMouseHover);
             seatPicBox.MouseLeave += new EventHandler(OnMouseLeave);
  
             //Update seat colour to match status
@@ -88,7 +89,10 @@ namespace BCPA_OTS_Prototype
             if (seatObj == null) { return; };
 
             //If seat is selected show the grab object cursor
-            if (parentUI.selectedSeatUIs.Contains(this)){ this.parentUI.Cursor = Cursors.Hand; }
+            if (parentUI.selectedSeatUIs.Contains(this)){ this.parentUI.Cursor = Cursors.Hand; this.Cursor = Cursors.Hand; }
+
+            //If seat is moving, exit, dont show tooltip
+            if (parentUI.seatMoving) { return; };
 
             //Create and show balloon tooltip
             seatTt = new ToolTip();                 //create object
@@ -115,6 +119,13 @@ namespace BCPA_OTS_Prototype
 
             //Show tooltip, infinite duration while user keeps mouse over seat
             seatTt.Show(ttText, layoutPicBox, ttPosX, ttPosY);
+        }
+
+        /* On Mouse Hover: When user keeps hovering mouse over seat, this keeps firing */
+        private void OnMouseHover(object sender, EventArgs eventArgs)
+        {
+            //If seat is selected show the grab object cursor
+            if (parentUI.selectedSeatUIs.Contains(this)) { this.parentUI.Cursor = Cursors.Hand; this.Cursor = Cursors.Hand; }
         }
 
         /* On Mouse Leave: When users mouse stops hovering over the seat, destroy the tooltip */
